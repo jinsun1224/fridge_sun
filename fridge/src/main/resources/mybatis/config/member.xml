@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sql Mapper -->
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+  <resultMap type="mvo" id="memberRM">
+      <result property="id" column="member_id" />
+       <result property="level" column="member_level" />
+        <result property="registerDate" column="register_date" />
+</resultMap>
+	<!-- 아이디로 찾기 -->
+	<select id="findById" resultMap="memberRM">
+		select * from member where member_id=#{value}
+	</select>
+
+	<!-- 회원가입 -->
+	<insert id="registerMember" parameterType="mvo" >
+		insert into member(member_id, password, nick, name, email, gender, answer,
+		member_level, register_date, love)
+		values(#{id}, #{password},#{nick}, #{name}, #{email}, #{gender}, #{answer}, 1, sysdate, 0 )
+	</insert>
+	<!-- id체크 -->
+		<select id="idCheck" resultType="int">
+		select count(*) from member where member_id=#{value}
+	</select>
+	<!-- 로그인 -->
+   <select id="login" resultMap="memberRM">
+      select *from member where member_id=#{id} and password=#{password}
+   </select>
+   <!-- 회원정보 수정 -->
+   <update id="updateMember" parameterType="mvo"  >
+   update member set password=#{password},name=#{name},nick=#{nick},gender=#{gender},
+   email=#{email},answer=#{answer} 	where member_id=#{id}
+   </update>
+</mapper>

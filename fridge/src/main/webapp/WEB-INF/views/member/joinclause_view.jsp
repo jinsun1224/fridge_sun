@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-하잉
+가입약관
+	
 </body>
 </html>
