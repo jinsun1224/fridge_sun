@@ -12,6 +12,9 @@
 		$("#updateBtn").click(function(){
 			location.href = "${initParam.root}member_updateMemberForm.do";
 		});
+		$("#deleteBtn").click(function(){
+	         location.href="${initParam.root}member_deleteMemberForm.do";
+	      });
 	
 	});
 
@@ -39,7 +42,7 @@
 
 
 <input type="button" value="수정하기" id="updateBtn">
-<!-- <input type="button" value="탈퇴하기" onclick="deleteBtn()"> -->
+ <input type="button" value="탈퇴하기" id="deleteBtn">
 
 <%-- <a href="${initParam.root}member_updateMemberForm.do">수정하기</a>
 <a href="${initParam.root}member_deleteMemberForm.do">탈퇴하기</a> --%>

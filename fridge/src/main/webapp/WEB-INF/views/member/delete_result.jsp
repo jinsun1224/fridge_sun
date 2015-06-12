@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-${sessionScope.mvo.nick }님이 로그인 하셨습니다.
+   
+정상적으로 탈퇴되었습니다.
+감사합니다.
+<a href="${initParam.root}home.do">홈으로</a>
 </body>
 </html>

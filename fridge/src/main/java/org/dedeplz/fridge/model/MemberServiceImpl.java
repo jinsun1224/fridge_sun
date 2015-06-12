@@ -33,7 +33,22 @@ public class MemberServiceImpl implements MemberService {
 	public void updateMember(MemberVO vo) {
 		System.out.println("updateServiceImpl");
 		memberDAO.updateMember(vo);
-		
+	}
+	   @Override
+	   public void deleteMember(MemberVO vo) {
+	      memberDAO.deleteMember(vo);
+	   }
+	@Override
+	public String nickCheck(String nick) {
+		return memberDAO.nickCheck(nick);
+	}
+	   @Override
+	   public String findMyId(MemberVO vo) {
+	      return memberDAO.findMyId(vo);
+	   }
+	@Override
+	public String findMyPassword(MemberVO vo) {
+		return memberDAO.findMyPassword(vo);
 	}
 
 }

@@ -6,13 +6,19 @@
 
    <c:choose>
       <c:when test="${sessionScope.mvo==null}">
-         <a href="${initParam.root}member_registerForm.do">회원가입</a>
+         <a href="${initParam.root}member_joinclause_view.do">회원가입</a>
+         <%-- <a href="${initParam.root}member_registerForm.do">회원가입</a> --%>
          <a href="${initParam.root}member_loginForm.do">로그인</a>
       </c:when>
       <c:otherwise>
-      ${sessionScope.mvo.name}님 접속중!!
-      <a href="${initParam.root}member_myPage.do">마이페이지</a>
-      <a href="${initParam.root}member_logout.do">로그아웃</a>
+      ${sessionScope.mvo.nick}님 접속중!!
+      <a href="${initParam.root}member_mypage.do">마이페이지</a>
+         <a href="${initParam.root}member_logout.do">로그아웃</a>
+         <c:choose>
+            <c:when test="${sessionScope.mvo.level=='5' }">
+                <a href="${initParam.root}admin_adminpage.do">관리자페이지</a>
+            </c:when>
+         </c:choose>
       </c:otherwise>
    </c:choose>
 </h2>

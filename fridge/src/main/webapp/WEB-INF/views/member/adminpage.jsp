@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-${sessionScope.mvo.nick }님이 로그인 하셨습니다.
+ㅎㅇㅎㅇㅎㅇ
 </body>
 </html>

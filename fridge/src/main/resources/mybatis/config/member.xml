@@ -24,6 +24,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<select id="idCheck" resultType="int">
 		select count(*) from member where member_id=#{value}
 	</select>
+		<!-- nick체크 -->
+		<select id="nickCheck" resultType="int">
+		select count(*) from member where nick=#{value}
+	</select>
 	<!-- 로그인 -->
    <select id="login" resultMap="memberRM">
       select *from member where member_id=#{id} and password=#{password}
@@ -33,4 +37,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    update member set password=#{password},name=#{name},nick=#{nick},gender=#{gender},
    email=#{email},answer=#{answer} 	where member_id=#{id}
    </update>
+   <!-- 회원 탈퇴 -->
+      <delete id="deleteMember" parameterType="mvo">
+      delete from member where member_id=#{id} and password=#{password}
+   </delete>
+   <!-- 아이디 찾기 -->
+   <select id="findMyId" parameterType="mvo" resultType="string">
+      select member_id from member
+      where name=#{name} and email=#{email} and answer=#{answer}
+   </select>
+   <!-- 비밀번호 찾기 -->
+      <select id="findMyPassword" parameterType="mvo" resultType="string">
+      select password from member
+      where member_id=#{id} and name=#{name} and email=#{email} and answer=#{answer}
+   </select>
+   
 </mapper>

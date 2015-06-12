@@ -33,7 +33,7 @@
 	            $("#passwordCheckView").html("같네요");
 	         }
 	      }); 
-	     $("#resetBtn").click(function(){
+	      $("#resetBtn").click(function(){
 	    	 $("#password").val("");
 	    	 $("#password2").val("");
 	    	 $("#name").val("${mvo.name}");
@@ -41,12 +41,15 @@
 	    	 $("#email").val("${mvo.email}");
 	    	 $("#answer").val("${mvo.answer}");
 
-	     });
+	     }); 
 	});//ready
 </script>
 
 <form:form action="${initParam.root}member_update.do" commandName="memberVO">
   <p>아이디 : ${sessionScope.mvo.id }</p>
+  <input type="hidden" name="id" value="${sessionScope.mvo.id }">
+  <input type="hidden" name="gender" value="${sessionScope.mvo.gender }">
+     <input type="hidden" name="level" value="${sessionScope.mvo.level }">
   <%-- <font color="red"><form:errors id="id_error" path="id"></form:errors></font><br> --%>
 <%-- 아이디 : <input type=text  value=${sessionScope.mvo.id } readonly></input><br> --%>
  변경할 패스워드 : <form:password path="password" id="password" />
@@ -57,16 +60,16 @@
  이름 : <form:input path="name" id="name" value="${sessionScope.mvo.name }"/> 
    <font color="red"><form:errors path="name"></form:errors></font><br>   
  닉네임 : <form:input path="nick" id="nick" value="${sessionScope.mvo.nick }" /> 
-   <font color="red"><form:errors path="name"></form:errors></font><br>   
+   <font color="red"><form:errors path="nick"></form:errors></font><br>   
  e-mail : <form:input path="email" id="email" value="${sessionScope.mvo.email }" />
    <font color="red"><form:errors path="email"></form:errors></font><br>   
  질문 : 가장 좋아하는 요리는?<br>
  답 : <form:input path="answer" id="answer" value="${sessionScope.mvo.answer }" />
    <font color="red"><form:errors path="email"></form:errors></font><br>   
-   <input type="submit" value="수정완료">
-   <input type="button" value="초기화" id="resetBtn">
- 	
+   <input type="submit" value="수정완료">	
+ <input type="button" value="초기화" id="resetBtn">
    </form:form>
+    
 
 
 

@@ -1,4 +1,4 @@
-select *from member;
+select * from member;
 drop table member;
 
 create table member(
@@ -43,8 +43,8 @@ update member set password='1234', name='한지민ㅇㅇㅇ', nick='abcd',gender
    
    
    
-   
-   
+   select password from member where member_id='aaaa' and name='aaaa' and email='aaa@aaa.com' and answer='aaa';
+   select password from member where member_id='aaaa' and name='aaaa' and email='aaa@aaa.com' and answer='aaa';
    
    
    

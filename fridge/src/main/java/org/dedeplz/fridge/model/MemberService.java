@@ -13,4 +13,12 @@ public interface MemberService {
 	public MemberVO login(MemberVO vo);
 
 	public void updateMember(MemberVO vo);
+
+	public void deleteMember(MemberVO vo);
+
+	public String nickCheck(String nick);
+
+	public String findMyPassword(MemberVO vo);
+
+	public String findMyId(MemberVO vo);
 }
