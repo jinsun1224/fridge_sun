@@ -1,5 +1,7 @@
 package org.dedeplz.fridge.model;
 
+import java.util.List;
+
 public interface MemberDAO {
 	public MemberVO findById(String id);
 
@@ -18,5 +20,10 @@ public interface MemberDAO {
 	public String findMyPassword(MemberVO vo);
 
 	public String findMyId(MemberVO vo);
+
+	public List<MemberVO> getMemberList(String pageNo);
+
+	public int totalContent();
+	
 
 }

@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    </update>
    <!-- 회원 탈퇴 -->
       <delete id="deleteMember" parameterType="mvo">
-      delete from member where member_id=#{id} and password=#{password}
+      delete from member where member_id=#{id} 
    </delete>
    <!-- 아이디 찾기 -->
    <select id="findMyId" parameterType="mvo" resultType="string">
@@ -51,5 +51,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       select password from member
       where member_id=#{id} and name=#{name} and email=#{email} and answer=#{answer}
    </select>
+   <select id="getMemberList" resultMap="memberRM">
+   select member_id,name,nick,gender,email,member_level,register_date
+   			FROM(
+   				select member_id,name,nick,gender,email,member_level,register_date, CEIL(rownum/10) AS page
+   					from( 
+   						select member_id,name,nick,gender,email,member_level,to_char(register_date,'YYYY.MM.DD') as register_date
+   							from member order by register_date desc
+   					)
+   			) where page=#{value}
+   </select>
    
+   	<select id="totalContent" resultType="int">
+		select count(*) from member
+	</select>	
 </mapper>

@@ -57,5 +57,13 @@ public class MemberDAOImpl implements MemberDAO {
 	public String findMyPassword(MemberVO vo) {
 		return sqlSessionTemplate.selectOne("member.findMyPassword", vo);
 	}
+	@Override
+	public List<MemberVO> getMemberList(String pageNo) {
+		return sqlSessionTemplate.selectList("member.getMemberList", pageNo);
+	}
+	@Override
+	public int totalContent(){
+		return sqlSessionTemplate.selectOne("member.totalContent");
+	}
 
 }

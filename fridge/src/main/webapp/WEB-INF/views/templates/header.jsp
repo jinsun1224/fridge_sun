@@ -17,6 +17,7 @@
          <c:choose>
             <c:when test="${sessionScope.mvo.level=='5' }">
                 <a href="${initParam.root}admin_adminpage.do">관리자페이지</a>
+                									
             </c:when>
          </c:choose>
       </c:otherwise>

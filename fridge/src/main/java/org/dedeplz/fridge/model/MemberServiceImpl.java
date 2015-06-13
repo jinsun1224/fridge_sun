@@ -50,5 +50,15 @@ public class MemberServiceImpl implements MemberService {
 	public String findMyPassword(MemberVO vo) {
 		return memberDAO.findMyPassword(vo);
 	}
+	@Override
+	public ListVO getMemberList(String pageNo) {
+		if(pageNo==null||pageNo=="") 
+			pageNo="1";
+		List<MemberVO> list=memberDAO.getMemberList(pageNo);
+		int total=memberDAO.totalContent();
+		PagingBean paging=new PagingBean(total,Integer.parseInt(pageNo));
+		ListVO lvo=new ListVO(list,paging);
+		return lvo;
+	}
 
 }

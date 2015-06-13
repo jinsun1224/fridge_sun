@@ -21,4 +21,6 @@ public interface MemberService {
 	public String findMyPassword(MemberVO vo);
 
 	public String findMyId(MemberVO vo);
+
+	public  ListVO getMemberList(String pageNo);
 }

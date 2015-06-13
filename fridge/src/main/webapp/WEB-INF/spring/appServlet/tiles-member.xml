@@ -7,6 +7,9 @@
 	<definition name="member_*" extends="home">
 		<put-attribute name="main"  value="/WEB-INF/views/member/{1}.jsp"  />
 	</definition>		
+		<definition name="admin_*" extends="home">
+		<put-attribute name="main" value="/WEB-INF/views/member/admin/{1}.jsp"/>
+	</definition>
 </tiles-definitions>
 
 
