@@ -24,6 +24,8 @@ public interface MemberDAO {
 	public List<MemberVO> getMemberList(String pageNo);
 
 	public int totalContent();
+
+	public void levelChange(MemberVO vo);
 	
 
 }

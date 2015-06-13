@@ -13,6 +13,22 @@ function deleteMember(id) {
 	location.href="${initParam.root}admin_outMember.do?id="+id;
 	}
 }
+ $(document).ready(function(){
+ 	$("select").change(function(){	
+ 		alert($("#memberLevel option:selected").text());
+ 		
+ 		alert($(this).text().split("★").length);
+ 		/* var re= new RegExp($(this).text(),"★");
+ 		var resultArray = $(this).text().match(re); */
+ 		/*alert(resultArray.length); */
+ 		
+		/*  location.href="${initParam.root}admin_levelChange.do?id="+$(this).val();  */
+	}); 
+});  
+/*  function levelChange(id){
+	alert(id);
+	 location.href="${initParam.root}admin_levelChange.do?id="+id; 
+} */ 
 </script>
 </head>
 <body>
@@ -47,26 +63,34 @@ function deleteMember(id) {
 				</td>
 				<td>${mvo.email }</td>
 				<td>
-				<c:choose>
-               <c:when test="${mvo.level==2 }">
-                  	★★
-               </c:when>
-               <c:when test="${mvo.level==3 }">
-                  	★★★
-               </c:when>
-               <c:when test="${mvo.level==4 }">
-                  	★★★★
-               </c:when>
-               <c:when test="${mvo.level==5}">
-                  ★★★★★
-               </c:when>
-                 <c:when test="${mvo.level==6}">
-                  관리자
-               </c:when>
-               <c:otherwise>
-                  ★
-               </c:otherwise>
-            </c:choose>
+				<form name="levelForm">
+					<select id="memberLevel">
+						<c:forEach var="index" begin="1" end="6" step="1">
+						<c:choose>
+							<c:when test="${index==mvo.level }">								
+									<option value="${mvo.id}" selected>
+										<c:choose>
+											<c:when test="${index==6}">관리자</c:when>
+											<c:otherwise>
+												<c:forEach var="index3" begin="1" end="${index}" step="1">★</c:forEach>		
+											</c:otherwise>										
+										</c:choose>
+									</option>
+							</c:when>	
+								<c:otherwise>
+									<option value="${mvo.id}">
+										<c:choose>
+											<c:when test="${index==6}">관리자</c:when>
+											<c:otherwise>
+												<c:forEach var="index3" begin="1" end="${index}" step="1">★</c:forEach>				
+											</c:otherwise>										
+										</c:choose>	
+									</option>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</select>
+				</form>
             </td>
 				<td>${mvo.registerDate }</td>
 				 <td>

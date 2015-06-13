@@ -56,8 +56,8 @@ values('cccscd', '1234', 'ㄴㄴㄴㄴ', 'ㅇㄹㅇ', 'dfd@gmail.com', 2, '햄�
 
 
 
-
-
+  update member set member_level=5 	where member_id='cccscd';
+select member_id, member_level from member;
 
 
 select *from member;

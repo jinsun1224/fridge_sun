@@ -24,6 +24,13 @@ public class AdminController {
 		  return "redirect:admin_adminpage.do";
 	  }
 	  
+	  @RequestMapping("admin_levelChange.do")
+	  public String levelChange(MemberVO vo){
+		  System.out.println("level1"+vo);
+		  memberService.levelChange(vo);
+		  System.out.println("level2");
+		  return "redirect:admin_adminpage.do";
+	  }
 	  
 	  
 	  

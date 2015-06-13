@@ -60,5 +60,10 @@ public class MemberServiceImpl implements MemberService {
 		ListVO lvo=new ListVO(list,paging);
 		return lvo;
 	}
+	@Override
+	public void levelChange(MemberVO vo) {
+		memberDAO.levelChange(vo);
+		
+	}
 
 }

@@ -15,7 +15,7 @@
       <a href="${initParam.root}member_mypage.do">마이페이지</a>
          <a href="${initParam.root}member_logout.do">로그아웃</a>
          <c:choose>
-            <c:when test="${sessionScope.mvo.level=='5' }">
+            <c:when test="${sessionScope.mvo.level=='6' }">
                 <a href="${initParam.root}admin_adminpage.do">관리자페이지</a>
                 									
             </c:when>

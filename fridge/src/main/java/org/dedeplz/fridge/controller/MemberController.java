@@ -187,19 +187,14 @@ public class MemberController {
 	    */
 	   @RequestMapping("member_update.do")
 	   public ModelAndView updateMember(@Valid MemberVO vo,BindingResult result,HttpServletRequest request, HttpSession session){
-		  System.out.println(vo);
-		   System.out.println("update1");
 		   if(result.hasErrors()){
 			   System.out.println("update2"+result.hasErrors());
 				return new ModelAndView("member_update_form"); 
 			}
-		   System.out.println("update3");
 		   MemberVO vo1 = (MemberVO) session.getAttribute("mvo");
-		   System.out.println(vo1);
 		   vo.setId(vo1.getId());
 		   memberService.updateMember(vo);
 		  session.setAttribute("mvo", vo);
-		   System.out.println("update2");
 		return new ModelAndView("member_mypage");
 	   }
 	   

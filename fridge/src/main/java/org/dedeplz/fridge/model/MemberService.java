@@ -23,4 +23,6 @@ public interface MemberService {
 	public String findMyId(MemberVO vo);
 
 	public  ListVO getMemberList(String pageNo);
+
+	public void levelChange(MemberVO vo);
 }
