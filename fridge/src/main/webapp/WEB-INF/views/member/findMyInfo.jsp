@@ -4,7 +4,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#findMyId").click(function() {
-	         alert($("#findMyIdForm").serialize());
 	         $.ajax({
 	            type:"POST",
 	            url:"member_findMyId.do",
@@ -19,7 +18,6 @@
 	         });//ajax
 	      });//keyup
 		$("#findMyPassBtn").click(function(){
-			alert($("#findMyPasswordForm").serialize());
 			$.ajax({
 				type:"post",
 				url:"member_findMyPassword.do",

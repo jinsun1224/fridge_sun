@@ -133,12 +133,6 @@ public class MemberController {
 		return memberService.nickCheck(nick);
 	}
 	/**
-	 *로그인 
-	 * @param vo
-	 * @param request
-	 * @return
-	 */
-	/**
 	    *  로그인
 	    * @param vo
 	    * @param request

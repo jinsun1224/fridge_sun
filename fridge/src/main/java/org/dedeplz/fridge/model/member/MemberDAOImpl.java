@@ -51,8 +51,6 @@ public class MemberDAOImpl implements MemberDAO {
 	 */
 	@Override
 	public void updateMember(MemberVO vo) {
-		System.out.println("updateDAOImpl");
-		System.out.println("update"+vo);
 		sqlSessionTemplate.update("member.updateMember",vo);	
 	}
 	
