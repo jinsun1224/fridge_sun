@@ -1,10 +1,10 @@
-package org.dedeplz.fridge.model;
+package org.dedeplz.fridge.model.member;
 /**
  * 페이징 로직을 위한 클래스 
  * @author inst
  *
  */
-public class PagingBean {
+public class MemberPagingBean {
 	/**
 	 * 총 게시물 수 
 	 */
@@ -30,7 +30,7 @@ public class PagingBean {
 	 * @param totalContent
 	 * @param nowPage
 	 */
-	public PagingBean(int totalContent, int nowPage) {
+	public MemberPagingBean(int totalContent, int nowPage) {
 		super();
 		this.totalContent = totalContent;
 		this.nowPage = nowPage;
@@ -142,7 +142,7 @@ public class PagingBean {
 		return flag;
 	}
 	public static void main(String args[]){
-		PagingBean bean=new PagingBean(26,6);
+		MemberPagingBean bean=new MemberPagingBean(26,6);
 		System.out.println(bean.getTotalPage()+"페이지");
 		System.out.println(bean.getTotalPageGroup()+"페이지 그룹");
 		System.out.println(bean.getNowPageGroup()+" 현재 페이지 그룹");

@@ -13,22 +13,20 @@ function deleteMember(id) {
 	location.href="${initParam.root}admin_outMember.do?id="+id;
 	}
 }
- $(document).ready(function(){
- 	$("select").change(function(){	
- 		alert($("#memberLevel option:selected").text());
- 		
- 		alert($(this).text().split("★").length);
- 		/* var re= new RegExp($(this).text(),"★");
- 		var resultArray = $(this).text().match(re); */
- 		/*alert(resultArray.length); */
- 		
-		/*  location.href="${initParam.root}admin_levelChange.do?id="+$(this).val();  */
-	}); 
-});  
-/*  function levelChange(id){
-	alert(id);
-	 location.href="${initParam.root}admin_levelChange.do?id="+id; 
-} */ 
+
+function level_change(level) {
+	if(level.options[level.selectedIndex].value){
+		var star = level.options[level.selectedIndex].text;
+		var selectLevel=0;
+		if(star=="관리자"){
+			selectLevel=6;
+		}else{
+			selectLevel = star.length;
+		}
+		var memberId = level.options[level.selectedIndex].value;
+		location.href="${initParam.root}admin_levelChange.do?id="+memberId+"&level="+selectLevel; 
+		};
+	}
 </script>
 </head>
 <body>
@@ -64,7 +62,7 @@ function deleteMember(id) {
 				<td>${mvo.email }</td>
 				<td>
 				<form name="levelForm">
-					<select id="memberLevel">
+					<select name="memberLevel" onchange="level_change(this)">
 						<c:forEach var="index" begin="1" end="6" step="1">
 						<c:choose>
 							<c:when test="${index==mvo.level }">								
@@ -106,11 +104,6 @@ function deleteMember(id) {
 		<br></br>	
 	<!-- 페이징 처리 -->		
 	<br></br>	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<!-- 페이징 처리 -->	
-	<%-- 이전 페이지 그룹이 있으면 이미지 보여준다.
-		   이미지 링크는 현 페이지 그룹 시작페이지 번호 -1 =>
-		   이전 페이지 그룹의 마지막 페이지 번호로 한다. 
-	 --%>
 	 <p class="paging">
 	 <c:if test="${requestScope.lvo.pagingBean.previousPageGroup}">
 	 <a href=
@@ -118,11 +111,6 @@ function deleteMember(id) {
 	 startPageOfPageGroup-1}">◀&nbsp;</a>
 	 </c:if>
 	 &nbsp;&nbsp;
-	<%-- PagingBean 을 이용해서 현재 페이지에 해당되는 페이지그룹의
-		   시작페이지~~마지막페이지까지 화면에 보여준다. 
-		   이 때 현재 페이지를 제외한 나머지 페이지는 링크를 걸어
-		   해당 페이지에 대한 게시물 리스트 조회가 가능하도록 한다. 
-	 --%>	
 	<c:forEach var="i" 
 	begin="${requestScope.lvo.pagingBean.startPageOfPageGroup}"
 	 end="${requestScope.lvo.pagingBean.endPageOfPageGroup}">
@@ -136,11 +124,6 @@ function deleteMember(id) {
 	</c:choose>
 	</c:forEach>	 
 	&nbsp;&nbsp;
-	<%-- 다음 페이지 그룹이 있으면 화살표 이미지를 보여준다.
-			이미지 링크는 현재 페이지 그룹의 마지막 번호 + 1 => 
-			다음 그룹의 시작 페이지로 링크한다. 
-			right_arrow_btn.gif
-	 --%>
 	 <c:if test="${requestScope.lvo.pagingBean.nextPageGroup}">
 	 <a href="admin_adminpage.do?pageNo=${requestScope.lvo.pagingBean.endPageOfPageGroup+1}">
 	 ▶

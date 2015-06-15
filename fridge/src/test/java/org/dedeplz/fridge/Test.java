@@ -1,7 +1,7 @@
 package org.dedeplz.fridge;
 
 
-import org.dedeplz.fridge.model.MemberDAO;
+import org.dedeplz.fridge.model.member.MemberDAO;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

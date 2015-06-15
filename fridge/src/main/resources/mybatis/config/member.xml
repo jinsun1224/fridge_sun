@@ -13,7 +13,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findById" resultMap="memberRM">
 		select * from member where member_id=#{value}
 	</select>
-
 	<!-- 회원가입 -->
 	<insert id="registerMember" parameterType="mvo" >
 		insert into member(member_id, password, nick, name, email, gender, answer,
@@ -51,6 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       select password from member
       where member_id=#{id} and name=#{name} and email=#{email} and answer=#{answer}
    </select>
+   <!-- 관리자 List  -->
    <select id="getMemberList" resultMap="memberRM">
    select member_id,name,nick,gender,email,member_level,register_date
    			FROM(
@@ -61,12 +61,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    					)
    			) where page=#{value}
    </select>
-   
-   	<select id="totalContent" resultType="int">
+   <!-- 전체 회원 수 -->
+   	<select id="totalMember" resultType="int">
 		select count(*) from member
 	</select>	
 	<!-- 등급 변경 -->
 	<update id="levelChange" parameterType="mvo">
 	  update member set member_level=#{level} 	where member_id=#{id}
 	</update>
+	  <!-- 좋아요 수 count하기 -->
+   <select id="loveCount" parameterType="mvo"  resultType="int">
+      select love from member where member_id=#{id} and password=#{password}
+   </select>
+   <!-- 회원 등급 자동 업그레이드 -->
+   <update id="updateMemberGrade" parameterType="mvo">
+         update member set member_level=member_level+1 where member_id=#{id} and password=#{password}
+   </update>
 </mapper>

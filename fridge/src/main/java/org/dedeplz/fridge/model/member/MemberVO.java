@@ -1,4 +1,4 @@
-package org.dedeplz.fridge.model;
+package org.dedeplz.fridge.model.member;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;

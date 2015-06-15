@@ -33,6 +33,15 @@
 	            $("#passwordCheckView").html("같네요");
 	         }
 	      }); 
+		 $("#regForm").submit(function(){
+	         var password = $("#password").val();
+	            var password2 = $("#password2").val();
+	            if(password!=password2){
+	               alert("패스워드 확인 해주세요");
+	               return false;
+	            }
+	      });
+	      
 	      $("#resetBtn").click(function(){
 	    	 $("#password").val("");
 	    	 $("#password2").val("");
@@ -45,7 +54,7 @@
 	});//ready
 </script>
 
-<form:form action="${initParam.root}member_update.do" commandName="memberVO">
+<form:form action="${initParam.root}member_update.do" commandName="memberVO" id="regForm">
   <p>아이디 : ${sessionScope.mvo.id }</p>
   <input type="hidden" name="id" value="${sessionScope.mvo.id }">
   <input type="hidden" name="gender" value="${sessionScope.mvo.gender }">
@@ -56,6 +65,7 @@
    <font color="red"><form:errors id="pass_error" path="password"></form:errors></font>
    <span id="passwordSizeView"></span><br>
 변경할 패스워드 확인 <input type="password" id="password2">
+  <font color="red"><form:errors id="pass_error" path="password"></form:errors></font>
    <span id="passwordCheckView"></span> <br>
  이름 : <form:input path="name" id="name" value="${sessionScope.mvo.name }"/> 
    <font color="red"><form:errors path="name"></form:errors></font><br>   

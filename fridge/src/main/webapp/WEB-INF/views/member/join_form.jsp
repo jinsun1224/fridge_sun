@@ -93,7 +93,7 @@
          var password = $("#password").val();
             var password2 = $("#password2").val();
             if(password!=password2){
-               alert("비밀번호 체크부탁");
+               alert("패스워드 확인 해주세요");
                return false;
             }
       });

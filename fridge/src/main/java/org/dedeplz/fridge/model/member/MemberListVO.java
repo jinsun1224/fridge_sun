@@ -1,4 +1,4 @@
-package org.dedeplz.fridge.model;
+package org.dedeplz.fridge.model.member;
 
 
 import java.util.List;
@@ -8,16 +8,16 @@ import java.util.List;
  * @author inst
  *
  */
-public class ListVO {
+public class MemberListVO {
 	private List<MemberVO> list;
-	private PagingBean pagingBean;
+	private MemberPagingBean pagingBean;
 	
-	public ListVO() {
+	public MemberListVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ListVO(List<MemberVO> list, PagingBean pagingBean) {
+	public MemberListVO(List<MemberVO> list, MemberPagingBean pagingBean) {
 		super();
 		this.list = list;
 		this.pagingBean = pagingBean;
@@ -31,11 +31,11 @@ public class ListVO {
 		this.list = list;
 	}
 
-	public PagingBean getPagingBean() {
+	public MemberPagingBean getPagingBean() {
 		return pagingBean;
 	}
 
-	public void setPagingBean(PagingBean pagingBean) {
+	public void setPagingBean(MemberPagingBean pagingBean) {
 		this.pagingBean = pagingBean;
 	}
 

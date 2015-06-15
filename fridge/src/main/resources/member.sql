@@ -1,5 +1,6 @@
 select * from member;
 drop table member;
+select * from recipe;
 
 create table member(
 	member_id varchar2(50) primary key,
@@ -72,6 +73,6 @@ update member set password='1234', name='한지민ㅇㅇㅇ', nick='abcd',gender
    select password from member where member_id='aaaa' and name='aaaa' and email='aaa@aaa.com' and answer='aaa';
    select password from member where member_id='aaaa' and name='aaaa' and email='aaa@aaa.com' and answer='aaa';
    
-   
+ update member set love=10, member_level=1 where member_id='hihihi'
    
    

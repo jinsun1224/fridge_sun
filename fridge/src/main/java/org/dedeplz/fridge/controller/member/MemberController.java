@@ -1,4 +1,4 @@
-package org.dedeplz.fridge.controller;
+package org.dedeplz.fridge.controller.member;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.dedeplz.fridge.model.MemberService;
-import org.dedeplz.fridge.model.MemberVO;
+import org.dedeplz.fridge.model.member.MemberService;
+import org.dedeplz.fridge.model.member.MemberVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +27,6 @@ public class MemberController {
    public String home(){
 	   return "home";
    }
-   
    /**
     *회원 가입약관 joinclause_view.jsp로 이동 
     * @return
@@ -36,7 +35,6 @@ public class MemberController {
    public String joinClause(){
       return "member_joinclause_view";
    }
-   
    /**
     * 회원등록 폼(join_form.jsp)으로 이동
     * @return
@@ -45,7 +43,6 @@ public class MemberController {
    public ModelAndView registerForm(){	
 		return new ModelAndView("member_join_form","memberVO",new MemberVO());
    }
-   
    /**
     * 로그인 폼(login.jsp)로 이동
     * @return
@@ -53,9 +50,7 @@ public class MemberController {
    @RequestMapping("member_loginForm.do")
    public String loginForm(){
       return "member_login_form";
-   }
-   
- 
+   } 
    /**
     * 마이페이지 (mypage.jsp)로 이동
     * @return
@@ -64,7 +59,6 @@ public class MemberController {
    public String showMyPage(){
 	   return "member_mypage";
    }
-   
    /**
     * 업데이트 전 비밀번호 체크 폼 (update_check_form.jsp)로 이동
     */
@@ -72,7 +66,6 @@ public class MemberController {
    public String updateMemeberForm(){
 	   return "member_update_check_form";
    }
-   
    /**
     *회원 탈퇴 전 비밀번호 확인form.jsp로 이동 
     * @return
@@ -81,7 +74,6 @@ public class MemberController {
    public String deleteMemberForm() {
       return "member_delete_check_form";
    }
-   
    /**
     * 아이디 /비밀번호 찾기 폼으로
     * @return
@@ -89,8 +81,7 @@ public class MemberController {
    @RequestMapping("member_findMyInfo.do")
    public String findMyInfo(){
       return "member_findMyInfo";
-   }
-   
+   }   
    /**
     * 회원 등록 및 validation,  등록 결과 메서드로 redirect
     * @param vo
@@ -99,16 +90,14 @@ public class MemberController {
     */
    @RequestMapping(value="member_register.do",method=RequestMethod.POST)
 	public ModelAndView registerMember(@Valid MemberVO vo,BindingResult result){
-	   System.out.println(vo);
 		if(result.hasErrors()){
-			return new ModelAndView("member_register_form"); 
+			return new ModelAndView("member_join_form"); 
 		}
 		  memberService.registerMember(vo);
 		   return new ModelAndView("redirect:regiResult.do?id="+vo.getId());
-	}
-   
+	}   
    /**
-    * 등록 후 register_result.jsp로 이동
+    * 회원 등록 완료
     * @param request
     * @param response
     * @param vo
@@ -121,7 +110,6 @@ public class MemberController {
         session.setAttribute("mvo", mvo);
 		return new ModelAndView("member_join_result","mvo",mvo);
 	}
-
    /**
     * 아이디 중복체크(ajax)
     * @param request
@@ -132,8 +120,7 @@ public class MemberController {
 	public String idCheckAjax(HttpServletRequest request) {		
 		String id=request.getParameter("id");
 		return memberService.idCheck(id);
-	}
-	
+	}	
 	/**
 	 * 닉네임 중복체크(ajax)
 	 * @param request
@@ -145,27 +132,53 @@ public class MemberController {
 		String nick=request.getParameter("nick");
 		return memberService.nickCheck(nick);
 	}
-
 	/**
 	 *로그인 
 	 * @param vo
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("member_login.do")
-	   public String login(MemberVO vo,HttpServletRequest request){
-	      MemberVO mvo=memberService.login(vo);
-	      if(mvo==null)
+	/**
+	    *  로그인
+	    * @param vo
+	    * @param request
+	    * @return
+	    */
+	   @RequestMapping("member_login.do")
+	   public String login(MemberVO vo, HttpServletRequest request) {
+	      MemberVO mvo = memberService.login(vo);
+	      if (mvo == null)
 	         return "member_login_fail";
-	      else{
-	         HttpSession session=request.getSession();
+	      else {
+	         HttpSession session = request.getSession();
+	         int love = memberService.loveCount(mvo);
+	         if ((mvo.getLevel()==1)&&(love >= 10)) {
+	            memberService.updateMemberGrade(mvo);
+	            mvo.setLevel(mvo.getLevel()+1);
+	            session.setAttribute("mvo", mvo);
+	            return "member_upgrade_result";
+	         }else if ((mvo.getLevel()==2)&&(love >= 30)) {
+	            memberService.updateMemberGrade(mvo);
+	            mvo.setLevel(mvo.getLevel()+1);
+	            session.setAttribute("mvo", mvo);
+	            return "member_upgrade_result";
+	         }else if((mvo.getLevel()==3)&&(love >= 50)) {
+	            memberService.updateMemberGrade(mvo);
+	            mvo.setLevel(mvo.getLevel()+1);
+	            session.setAttribute("mvo", mvo);
+	            return "member_upgrade_result";
+	         }else if((mvo.getLevel()==4)&&(love >= 80)) {
+	            memberService.updateMemberGrade(mvo);
+	            mvo.setLevel(mvo.getLevel()+1);
+	            session.setAttribute("mvo", mvo);
+	            return "member_upgrade_result";
+	         }
 	         session.setAttribute("mvo", mvo);
 	         return "member_login_ok";
-	      }      
-	   }
-	  
+	      }
+	   }	  
 	/**
-	 * 로그아웃 후 home.jsp로 이동
+	 * 로그아웃 
 	 * @param request
 	 * @return
 	 */
@@ -175,8 +188,7 @@ public class MemberController {
 	      if(session!=null)
 	         session.invalidate();
 	      return "home";
-	   }   
-	  
+	   }   	  
 	   /**
 	    * 회원정보 업데이트
 	    * @param vo
@@ -188,16 +200,14 @@ public class MemberController {
 	   @RequestMapping("member_update.do")
 	   public ModelAndView updateMember(@Valid MemberVO vo,BindingResult result,HttpServletRequest request, HttpSession session){
 		   if(result.hasErrors()){
-			   System.out.println("update2"+result.hasErrors());
-				return new ModelAndView("member_update_form"); 
+			   return new ModelAndView("member_update_form"); 
 			}
 		   MemberVO vo1 = (MemberVO) session.getAttribute("mvo");
 		   vo.setId(vo1.getId());
 		   memberService.updateMember(vo);
 		  session.setAttribute("mvo", vo);
 		return new ModelAndView("member_mypage");
-	   }
-	   
+	   }	   
 	   /**
 	    * 회원 수정 비밀번호 체크
 	    * @param vo
@@ -205,8 +215,6 @@ public class MemberController {
 	    */
 	   @RequestMapping("member_passwordCheck_update.do")
 	   public ModelAndView passwordCheckUpdate(MemberVO vo) {
-	      System.out.println(vo.getPassword());
-	      System.out.println(vo.getId());
 	      MemberVO mvo = memberService.login(vo);
 	      if (mvo == null) {
 	         return new ModelAndView("member_password_check_fail");
@@ -214,7 +222,6 @@ public class MemberController {
 	         return new ModelAndView("member_update_form","memberVO",new MemberVO());
 	      }	      
 	   }
-
 	   /**
 	    *비밀번호 확인 되었으면 회원탈퇴 
 	    * @param vo
@@ -232,27 +239,22 @@ public class MemberController {
 	      if (session != null)
 	         session.invalidate();
 	      return "member_delete_result";
-	   } 
-	   
+	   } 	   
 	   /**
-	    * 아이디 찾기
+	    * 내 아이디 찾기
 	    */
 	   @RequestMapping("member_findMyId.do")
 	   @ResponseBody
 	   public String findMyId(MemberVO vo) {
-	      System.out.println(vo);
 	      String id = memberService.findMyId(vo);
 	      if (id == null) {
-	         System.out.println("정보없음");
 	         return "fail";
 	      } else {
-	         System.out.println("정보 ㅇㅇ");
 	         return id;
 	      }
-	   }
-	   
+	   }	   
 	   /**
-	    * 비밀번호찾기
+	    * 내 비밀번호 찾기
 	    * @return
 	    */	   
 	   @RequestMapping("member_findMyPassword.do")
@@ -265,5 +267,4 @@ public class MemberController {
 		   return password;
 		  }
 	   }
-
 }
